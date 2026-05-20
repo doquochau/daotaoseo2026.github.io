@@ -1,250 +1,912 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="vi">
 <head>
-<meta charset="utf-8">
-<title>Untitled Document</title>
-	<link href="css/main.css" rel="stylesheet">
-	<link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    
-    
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    
-    
-	<link rel="stylesheet" href="css/style.css" type="text/css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Khóa Học Marketing Online Chuyên Sâu — Faceseo Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Open+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================
+   FIX #1: html/body width 100% để full trang khi embed
+   ============================ */
+html, body {
+  width: 100%;
+  min-width: 0;
+}
+
+:root{
+  --blue-dark:#0a2d6e;
+  --blue:#1352c9;
+  --blue-mid:#1a65e8;
+  --blue-light:#e8f0fe;
+  --blue-xlight:#f0f6ff;
+  --accent:#f59e0b;
+  --accent2:#ef4444;
+  --white:#ffffff;
+  --text:#1a1a2e;
+  --gray:#64748b;
+  --gray-light:#f1f5f9;
+  --border:#e2e8f0;
+  --nav-h:72px; /* FIX #2: dùng biến để đồng bộ chiều cao nav */
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Open Sans',sans-serif;
+  color:var(--text);
+  background:#fff;
+  overflow-x:hidden;
+}
+
+/* ============================
+   NAV
+   FIX #3: position:fixed → position:sticky
+   Với fixed: nav nằm ngoài flow, hero bị khuất bên dưới nav.
+   Với sticky: nav nằm trong flow, không cần margin-top trên hero.
+   Sticky hoạt động đúng trong iframe của Google Sites.
+   ============================ */
+nav{
+  position:sticky; /* FIX: đổi từ fixed → sticky */
+  top:0;
+  left:0;
+  right:0;
+  z-index:999;
+  background:rgba(255,255,255,0.97);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--border);
+  padding:0 60px;
+  height:var(--nav-h);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  box-shadow:0 1px 20px rgba(19,82,201,0.08);
+}
+.nav-logo img{height:44px;display:block}
+.nav-right{display:flex;align-items:center;gap:32px}
+.nav-links{display:flex;gap:28px}
+.nav-links a{
+  font-size:13px;font-weight:600;color:var(--gray);
+  text-decoration:none;letter-spacing:0.3px;transition:color .2s;
+}
+.nav-links a:hover{color:var(--blue)}
+.nav-phone{
+  display:flex;align-items:center;gap:8px;
+  font-size:14px;font-weight:700;color:var(--blue-dark);text-decoration:none;
+}
+.nav-phone-icon{
+  width:32px;height:32px;background:var(--blue);
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  flex-shrink:0; /* FIX #4: tránh bị co lại */
+}
+.nav-phone-icon svg{
+  width:16px;height:16px;stroke:#fff;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.btn-nav{
+  background:var(--blue);color:#fff;font-size:13px;font-weight:700;
+  padding:10px 20px;border-radius:6px;text-decoration:none;
+  transition:background .2s,transform .15s;white-space:nowrap;
+}
+.btn-nav:hover{background:var(--blue-dark);transform:translateY(-1px)}
+
+/* ============================
+   HERO
+   FIX #5: Bỏ margin-top:72px vì nav đã sticky (không cần bù nữa)
+   FIX #6: Dùng calc(88vh - var(--nav-h)) cho chính xác
+   ============================ */
+.hero{
+  /* margin-top:72px; ← ĐÃ XÓA, nav sticky không cần */
+  min-height:calc(88vh - var(--nav-h));
+  background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 60%,var(--blue-mid) 100%);
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  align-items:center;
+  gap:0;
+  overflow:hidden;
+  position:relative;
+}
+.hero::before{
+  content:'';position:absolute;
+  top:-200px;right:-200px;
+  width:600px;height:600px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.04);
+  pointer-events:none;
+}
+.hero::after{
+  content:'';position:absolute;
+  bottom:-150px;left:300px;
+  width:400px;height:400px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.03);
+  pointer-events:none;
+}
+.hero-left{
+  padding:80px 60px 80px 80px;
+  position:relative;z-index:1;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.12);
+  border:1px solid rgba(255,255,255,0.2);
+  color:rgba(255,255,255,0.9);
+  font-size:12px;font-weight:600;
+  padding:6px 16px;border-radius:20px;
+  letter-spacing:1px;text-transform:uppercase;
+  margin-bottom:24px;
+}
+.hero-badge span{width:6px;height:6px;background:#f59e0b;border-radius:50%;display:inline-block}
+.hero h1{
+  font-family:'Montserrat',sans-serif;
+  font-size:42px;font-weight:900;
+  line-height:1.15;color:#fff;
+  margin-bottom:20px;
+  text-transform:uppercase;letter-spacing:0.5px;
+}
+.hero h1 .highlight{color:#f59e0b;display:block}
+.hero-sub{
+  font-size:16px;font-weight:300;
+  color:rgba(255,255,255,0.8);
+  line-height:1.8;margin-bottom:36px;
+}
+.hero-buttons{display:flex;gap:16px;flex-wrap:wrap;margin-bottom:40px}
+.btn-primary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:var(--accent);color:var(--blue-dark);
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;
+  padding:16px 28px;border-radius:8px;text-decoration:none;
+  transition:all .25s;letter-spacing:0.3px;
+  box-shadow:0 4px 20px rgba(245,158,11,0.4);
+}
+.btn-primary:hover{background:#e08f00;transform:translateY(-2px);box-shadow:0 8px 30px rgba(245,158,11,0.5)}
+.btn-secondary{
+  display:inline-flex;align-items:center;gap:10px;
+  background:transparent;color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:14px;
+  padding:15px 28px;border-radius:8px;text-decoration:none;
+  border:2px solid rgba(255,255,255,0.4);
+  transition:all .25s;
+}
+.btn-secondary:hover{background:rgba(255,255,255,0.1);border-color:rgba(255,255,255,0.7)}
+.hero-mini-stats{display:flex;gap:32px;flex-wrap:wrap}
+.hero-mini-stat{display:flex;flex-direction:column;gap:4px}
+.hero-mini-num{font-family:'Montserrat',sans-serif;font-size:24px;font-weight:800;color:#f59e0b}
+.hero-mini-label{font-size:12px;color:rgba(255,255,255,0.6);font-weight:400}
+.hero-right{
+  position:relative;
+  height:100%;
+  min-height:500px;
+  overflow:hidden;
+}
+.hero-right img{
+  width:100%;height:100%;
+  object-fit:cover;
+  display:block;
+}
+.hero-right::before{
+  content:'';
+  position:absolute;top:0;left:0;bottom:0;width:120px;
+  background:linear-gradient(90deg,var(--blue-dark),transparent);
+  z-index:1;pointer-events:none;
+}
+
+/* TRUST BAR */
+.trust-bar{
+  background:var(--blue-xlight);
+  border-bottom:1px solid var(--border);
+  padding:24px 60px;
+  display:flex;align-items:center;justify-content:center;gap:60px;
+  flex-wrap:wrap;
+}
+.trust-item{display:flex;align-items:center;gap:12px;font-size:13px;font-weight:600;color:var(--blue-dark)}
+.trust-icon{
+  width:40px;height:40px;background:var(--blue);border-radius:10px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.trust-icon svg{
+  width:20px;height:20px;stroke:#fff;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.trust-item span{color:var(--gray)}
+
+/* ============================
+   STATS
+   FIX #7: border-right mobile — khi 2 cột, cột 2 và 4 không có border-right
+   ============================ */
+.stats{
+  background:var(--blue-dark);
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+}
+.stat{
+  padding:44px 40px;
+  border-right:1px solid rgba(255,255,255,0.08);
+  display:flex;flex-direction:column;gap:8px;
+  transition:background .2s;
+}
+.stat:last-child{border-right:none}
+.stat:hover{background:rgba(255,255,255,0.04)}
+.stat-num{font-family:'Montserrat',sans-serif;font-size:48px;font-weight:900;color:var(--accent);line-height:1}
+.stat-label{font-size:13px;color:rgba(255,255,255,0.55);font-weight:400}
+
+/* ============================
+   FIX #8: scroll-margin-top cho anchor link
+   Khi bấm menu, nội dung không bị che bởi sticky nav
+   ============================ */
+section[id], div[id]{scroll-margin-top: var(--nav-h)}
+
+/* SECTION */
+.section{padding:90px 80px;max-width:1200px;margin:0 auto}
+.section-full{padding:90px 80px;background:var(--gray-light)}
+.section-tag{
+  display:inline-flex;align-items:center;gap:10px;
+  font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;
+  color:var(--blue);margin-bottom:16px;
+}
+.section-tag::before{content:'';width:28px;height:2px;background:var(--blue);border-radius:2px}
+.section-title{
+  font-family:'Montserrat',sans-serif;
+  font-size:34px;font-weight:800;
+  color:var(--blue-dark);
+  line-height:1.2;margin-bottom:16px;
+  text-transform:uppercase;
+}
+.section-desc{font-size:15px;color:var(--gray);line-height:1.8;max-width:600px}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+.about-text{font-size:15px;line-height:1.9;color:#444}
+.about-text p{margin-bottom:18px}
+.about-text strong{color:var(--blue-dark);font-weight:700}
+.about-features{display:flex;flex-direction:column;gap:14px;margin-top:28px}
+.about-feature{
+  display:flex;align-items:flex-start;gap:14px;
+  padding:16px;background:var(--blue-xlight);
+  border-radius:10px;border-left:3px solid var(--blue);
+}
+.about-feature-icon{
+  width:32px;height:32px;background:var(--blue);border-radius:8px;
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px;
+}
+.about-feature-icon svg{
+  width:18px;height:18px;stroke:#fff;fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;
+}
+.about-feature-text h4{font-size:14px;font-weight:700;color:var(--blue-dark);margin-bottom:3px}
+.about-feature-text p{font-size:13px;color:var(--gray);line-height:1.6}
+
+/* INSTRUCTOR */
+.instructor-wrap{
+  background:linear-gradient(135deg,var(--blue-dark),var(--blue));
+  border-radius:20px;padding:48px;color:#fff;
+  position:relative;overflow:hidden;
+  box-shadow:0 20px 60px rgba(10,45,110,0.25);
+  /* FIX #9: min-width:0 tránh overflow trong grid */
+  min-width:0;
+}
+.instructor-wrap::before{
+  content:'';position:absolute;top:-80px;right:-80px;
+  width:250px;height:250px;border-radius:50%;
+  background:rgba(255,255,255,0.06);
+  pointer-events:none;
+}
+.instructor-img{
+  width:100px;height:100px;border-radius:16px;
+  object-fit:cover;border:3px solid rgba(255,255,255,0.3);
+  margin-bottom:20px;
+  position:relative;z-index:1; /* FIX #10: nằm trên pseudo-element */
+}
+.instructor-name{
+  font-family:'Montserrat',sans-serif;font-size:26px;font-weight:800;
+  color:#f59e0b;margin-bottom:4px;
+  position:relative;z-index:1;
+}
+.instructor-role{
+  font-size:12px;font-weight:600;letter-spacing:1.5px;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);margin-bottom:20px;
+  position:relative;z-index:1;
+}
+.instructor-quote{
+  font-size:14px;line-height:1.8;color:rgba(255,255,255,0.8);
+  padding-left:16px;border-left:3px solid #f59e0b;
+  font-style:italic;margin-bottom:24px;
+  position:relative;z-index:1;
+}
+.instructor-list{display:flex;flex-direction:column;gap:10px;position:relative;z-index:1}
+.instructor-list-item{
+  display:flex;align-items:flex-start;gap:10px;
+  font-size:13px;color:rgba(255,255,255,0.75);
+}
+.instructor-list-item::before{
+  content:'✓';color:#f59e0b;font-weight:700;flex-shrink:0;margin-top:1px;
+}
+
+/* CURRICULUM */
+.curriculum-wrap{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.curriculum-item{
+  display:flex;align-items:flex-start;gap:16px;
+  background:#fff;border:1px solid var(--border);
+  border-radius:12px;padding:18px 20px;
+  transition:all .2s;
+}
+.curriculum-item:hover{
+  border-color:var(--blue);background:var(--blue-xlight);transform:translateX(4px);
+}
+.curriculum-num{
+  width:36px;height:36px;border-radius:8px;
+  background:var(--blue-light);color:var(--blue);
+  font-family:'Montserrat',sans-serif;font-size:13px;font-weight:800;
+  display:flex;align-items:center;justify-content:center;
+  flex-shrink:0;transition:all .2s;
+}
+.curriculum-item:hover .curriculum-num{background:var(--blue);color:#fff}
+.curriculum-text{font-size:13px;color:#333;line-height:1.6;padding-top:2px}
+
+/* BENEFITS */
+.benefits-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.benefit-card{
+  background:#fff;border:1px solid var(--border);
+  border-radius:16px;padding:32px 28px;
+  transition:all .25s;
+  position:relative;overflow:hidden;
+}
+.benefit-card::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:linear-gradient(90deg,var(--blue),var(--blue-mid));
+  transform:scaleX(0);transform-origin:left;
+  transition:transform .3s ease;
+}
+.benefit-card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 16px 48px rgba(19,82,201,0.12);
+  border-color:var(--blue-light);
+}
+.benefit-card:hover::before{transform:scaleX(1)}
+.benefit-icon-wrap{
+  width:52px;height:52px;
+  background:var(--blue-light);border-radius:14px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:20px;transition:background .2s;
+}
+.benefit-card:hover .benefit-icon-wrap{background:var(--blue)}
+.benefit-icon-wrap svg{
+  width:26px;height:26px;stroke:var(--blue);fill:none;
+  stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;
+  transition:stroke .2s;
+}
+.benefit-card:hover .benefit-icon-wrap svg{stroke:#fff}
+.benefit-card h3{
+  font-family:'Montserrat',sans-serif;font-size:16px;font-weight:800;
+  color:var(--blue-dark);margin-bottom:12px;text-transform:uppercase;
+}
+.benefit-card p{font-size:13px;color:var(--gray);line-height:1.8}
+
+/* GALLERY */
+.gallery-section{background:var(--blue-dark);padding:90px 80px}
+.gallery-section .section-title{color:#fff}
+.gallery-section .section-tag{color:var(--accent)}
+.gallery-section .section-tag::before{background:var(--accent)}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:12px;
+  margin-top:48px;
+}
+.gallery-item{
+  border-radius:12px;overflow:hidden;
+  aspect-ratio:4/3;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+}
+.gallery-item:hover{transform:scale(1.03);box-shadow:0 12px 40px rgba(0,0,0,0.4)}
+.gallery-item img{width:100%;height:100%;object-fit:cover;display:block}
+/* FIX #11: .big cần aspect-ratio:auto để chiều cao tự co dãn theo 2 hàng */
+.gallery-item.big{grid-column:span 2;grid-row:span 2;aspect-ratio:auto;min-height:280px}
+
+/* PRICING */
+.pricing-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;max-width:860px;margin:48px auto 0}
+.pricing-card{
+  background:#fff;border:2px solid var(--border);
+  border-radius:20px;padding:40px;
+  transition:all .2s;
+  position:relative;
+}
+.pricing-card.featured{
+  border-color:var(--blue);
+  box-shadow:0 8px 40px rgba(19,82,201,0.15);
+}
+.pricing-badge{
+  position:absolute;top:-14px;left:50%;transform:translateX(-50%);
+  background:var(--blue);color:#fff;
+  font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;
+  padding:5px 20px;border-radius:20px;white-space:nowrap;
+}
+.pricing-type{
+  font-family:'Montserrat',sans-serif;font-size:18px;font-weight:800;
+  color:var(--blue-dark);margin-bottom:8px;
+}
+.pricing-price{
+  font-family:'Montserrat',sans-serif;
+  font-size:42px;font-weight:900;color:var(--blue);
+  margin-bottom:4px;
+}
+.pricing-price span{font-size:20px}
+.pricing-original{font-size:14px;color:var(--gray);text-decoration:line-through;margin-bottom:24px}
+.pricing-features{display:flex;flex-direction:column;gap:10px;margin-bottom:28px}
+.pricing-feature{display:flex;align-items:flex-start;gap:10px;font-size:13px;color:#444}
+.pricing-feature::before{content:'✓';color:var(--blue);font-weight:700;flex-shrink:0}
+.btn-register{
+  display:block;text-align:center;
+  background:var(--blue);color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:14px;
+  padding:16px;border-radius:10px;text-decoration:none;
+  transition:all .2s;letter-spacing:0.3px;
+}
+.btn-register:hover{background:var(--blue-dark);transform:translateY(-2px)}
+.btn-register.outline{
+  background:transparent;border:2px solid var(--blue);color:var(--blue);
+}
+.btn-register.outline:hover{background:var(--blue);color:#fff}
+
+/* TESTIMONIALS */
+.testimonials-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:48px}
+.testimonial-card{
+  background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;
+  transition:transform .2s,box-shadow .2s;
+}
+.testimonial-card:hover{
+  transform:translateY(-4px);box-shadow:0 12px 32px rgba(19,82,201,0.1);
+}
+.testimonial-card img{width:100%;aspect-ratio:1;object-fit:cover;object-position:top}
+.testimonial-caption{padding:12px 14px;font-size:12px;color:var(--gray);line-height:1.5}
+.testimonial-caption strong{color:var(--blue-dark);font-weight:700;display:block;margin-bottom:2px}
+
+/* CTA */
+.cta-section{
+  background:linear-gradient(135deg,var(--blue-dark) 0%,var(--blue) 100%);
+  padding:90px 80px;text-align:center;
+  position:relative;overflow:hidden;
+}
+.cta-section::before{
+  content:'';position:absolute;top:-100px;left:-100px;
+  width:400px;height:400px;border-radius:50%;background:rgba(255,255,255,0.04);
+}
+.cta-section::after{
+  content:'';position:absolute;bottom:-120px;right:-80px;
+  width:350px;height:350px;border-radius:50%;background:rgba(255,255,255,0.03);
+}
+.cta-section h2{
+  font-family:'Montserrat',sans-serif;font-size:40px;font-weight:900;
+  color:#fff;margin-bottom:16px;text-transform:uppercase;
+  position:relative;z-index:1;
+}
+.cta-section p{
+  font-size:16px;color:rgba(255,255,255,0.75);margin-bottom:40px;
+  position:relative;z-index:1;
+}
+.cta-buttons{
+  display:flex;gap:20px;justify-content:center;flex-wrap:wrap;
+  position:relative;z-index:1;
+}
+.btn-cta-white{
+  display:inline-flex;align-items:center;gap:12px;
+  background:#fff;color:var(--blue-dark);
+  font-family:'Montserrat',sans-serif;font-weight:800;font-size:15px;
+  padding:18px 36px;border-radius:10px;text-decoration:none;
+  transition:all .2s;
+  box-shadow:0 4px 20px rgba(0,0,0,0.2);
+}
+.btn-cta-white:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,0.25)}
+.btn-cta-outline{
+  display:inline-flex;align-items:center;gap:12px;
+  background:transparent;color:#fff;
+  font-family:'Montserrat',sans-serif;font-weight:700;font-size:15px;
+  padding:17px 36px;border-radius:10px;text-decoration:none;
+  border:2px solid rgba(255,255,255,0.5);
+  transition:all .2s;
+}
+.btn-cta-outline:hover{background:rgba(255,255,255,0.1);border-color:#fff}
+
+/* CONTACT */
+.contact-info{
+  display:flex;gap:40px;justify-content:center;flex-wrap:wrap;
+  margin-top:48px;
+}
+.contact-item{
+  display:flex;align-items:center;gap:12px;
+  font-size:14px;color:rgba(255,255,255,0.7);
+}
+.contact-item strong{color:#fff;font-weight:700}
+.contact-item svg{
+  width:18px;height:18px;stroke:var(--accent);fill:none;
+  stroke-width:2;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;
+}
+
+/* ============================
+   FOOTER
+   FIX #12: Sửa cấu trúc HTML footer cho đúng với CSS
+   ============================ */
+footer{
+  background:#0a1628;
+  padding:48px 80px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;
+  flex-wrap:wrap;
+}
+.footer-logo img{height:38px;filter:brightness(0) invert(1);opacity:0.7}
+.footer-copy{font-size:13px;color:rgba(255,255,255,0.35)}
+
+/* ============================
+   RESPONSIVE
+   FIX #13: stats border-right khi 2 cột
+   FIX #14: curriculum-wrap padding trên mobile
+   ============================ */
+@media(max-width:960px){
+  nav{padding:0 24px}
+  .nav-links,.nav-phone{display:none}
+
+  .hero{grid-template-columns:1fr}
+  .hero-right{display:none}
+  .hero-left{padding:60px 24px}
+  .hero h1{font-size:28px}
+
+  .trust-bar{padding:20px 24px;gap:24px}
+
+  /* FIX: stats 2 cột → xóa border-right cột phải */
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:28px 24px}
+  .stat:nth-child(2){border-right:none}
+  .stat:nth-child(3){border-top:1px solid rgba(255,255,255,0.08)}
+  .stat:nth-child(4){border-right:none;border-top:1px solid rgba(255,255,255,0.08)}
+
+  .section{padding:60px 24px}
+  .section-full{padding:60px 24px}
+  .gallery-section{padding:60px 24px}
+
+  .about-grid{grid-template-columns:1fr;gap:40px}
+  .instructor-wrap{padding:32px 24px}
+
+  .benefits-grid{grid-template-columns:1fr}
+  .curriculum-wrap{grid-template-columns:1fr}
+
+  .gallery-grid{grid-template-columns:repeat(2,1fr)}
+  .gallery-item.big{grid-column:span 1;grid-row:span 1;min-height:0}
+
+  .pricing-grid{grid-template-columns:1fr}
+  /* FIX #15: pricing featured card trên mobile cần thêm margin-top cho badge */
+  .pricing-card.featured{margin-top:14px}
+
+  .testimonials-grid{grid-template-columns:repeat(2,1fr)}
+
+  .cta-section{padding:60px 24px}
+  .cta-section h2{font-size:28px}
+
+  footer{padding:32px 24px;flex-direction:column;align-items:center;text-align:center}
+}
+
+@media(max-width:480px){
+  .hero h1{font-size:24px}
+  .hero-mini-stats{gap:20px}
+  .stats{grid-template-columns:1fr}
+  .stat{border-right:none !important;border-top:1px solid rgba(255,255,255,0.08)}
+  .stat:first-child{border-top:none}
+  .testimonials-grid{grid-template-columns:1fr 1fr}
+  .gallery-grid{grid-template-columns:1fr}
+  .cta-section h2{font-size:22px}
+}
+</style>
 </head>
-
 <body>
-	<div class="tong">
-		<div class="mot" id="mot">
-			 <section class="hero">
-        <div class="hero__slider owl-carousel">
-            <div class="hero__item set-bg" data-setbg="img/hero-1.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <span>Để chỉnh sửa trang web và video</span>
-                                <h2>Đỗ Quốc Hậu Portfolio</h2>
-                                <a href="#" class="primary-btn">Xem thêm về chúng tôi</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero__item set-bg" data-setbg="img/hero-1.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <span>Để chỉnh sửa trang web và video</span>
-                                <h2>Đỗ Quốc Hậu Portfolio</h2>
-                                <a href="#" class="primary-btn">Xem thêm về chúng tôi</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="hero__item set-bg" data-setbg="img/hero-1.jpg">
-                <div class="container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="hero__text">
-                                <span>Để chỉnh sửa trang web và video</span>
-                                <h2>Đỗ Quốc Hậu Portfolio</h2>
-                                <a href="#" class="primary-btn">Xem thêm về chúng tôi</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/logo.png" alt="Faceseo Việt Nam">
+  </a>
+  <div class="nav-right">
+    <div class="nav-links">
+      <a href="#about">Giới thiệu</a>
+      <a href="#curriculum">Nội dung</a>
+      <a href="#gallery">Lớp học</a>
+      <a href="#pricing">Học phí</a>
+    </div>
+    <a href="tel:0932523569" class="nav-phone">
+      <div class="nav-phone-icon">
+        <!-- FIX #16: SVG phone icon cần stroke-width rõ ràng hơn -->
+        <svg viewBox="0 0 24 24" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 2 2 0 012.22 1h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.91 8.09a16 16 0 006 6l.56-.56a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/>
+        </svg>
+      </div>
+      0932.523.569
+    </a>
+    <a href="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/" class="btn-nav">Đăng Ký Ngay</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-badge"><span></span>Faceseo Academy — TPHCM</div>
+    <h1>Đào Tạo SEO<br>Marketing Online<br><span class="highlight">Chuyên Sâu</span></h1>
+    <p class="hero-sub">Khóa học 13 buổi giúp bạn tự tay đưa website lên Top Google. Học thực chiến — cầm tay chỉ việc — bảo đảm làm được ngay.</p>
+    <div class="hero-buttons">
+      <a class="btn-primary" href="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/">Đăng Ký Khoá Học →</a>
+      <a class="btn-secondary" href="tel:0932523569">Gọi Tư Vấn Ngay</a>
+    </div>
+    <div class="hero-mini-stats">
+      <div class="hero-mini-stat"><span class="hero-mini-num">3.000+</span><span class="hero-mini-label">Học viên tốt nghiệp</span></div>
+      <div class="hero-mini-stat"><span class="hero-mini-num">13</span><span class="hero-mini-label">Năm phát triển</span></div>
+      <div class="hero-mini-stat"><span class="hero-mini-num">99%</span><span class="hero-mini-label">Hài lòng chất lượng</span></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/slide1.jpg" alt="Khóa học SEO Faceseo">
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+    </div>
+    <div><strong>Cam kết chất lượng</strong><br><span>100% đảm bảo</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    </div>
+    <div><strong>13 Buổi học</strong><br><span>Trọn gói chuyên sâu</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div><strong>Max 10 học viên/lớp</strong><br><span>Học kỹ — sát sao</span></div>
+  </div>
+  <div class="trust-item">
+    <div class="trust-icon">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+    </div>
+    <div><strong>Hỗ trợ sau khoá</strong><br><span>Miễn phí lâu dài</span></div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stat"><span class="stat-num">3.000+</span><span class="stat-label">Học viên tốt nghiệp</span></div>
+  <div class="stat"><span class="stat-num">100%</span><span class="stat-label">Thực hành thực chiến</span></div>
+  <div class="stat"><span class="stat-num">13</span><span class="stat-label">Năm kinh nghiệm</span></div>
+  <div class="stat"><span class="stat-num">Top 1</span><span class="stat-label">Đào tạo SEO Sài Gòn</span></div>
+</div>
+
+<!-- ABOUT -->
+<section id="about" class="section">
+  <div class="about-grid">
+    <div>
+      <div class="section-tag">Về Faceseo</div>
+      <h2 class="section-title">Trung Tâm Đào Tạo SEO Uy Tín Hàng Đầu TPHCM</h2>
+      <div class="about-text">
+        <p>Tại Faceseo, chúng tôi <strong>không dạy lý thuyết suông</strong>. Khóa học Marketing Online chuyên sâu được thiết kế theo tiêu chí <strong>"cầm tay chỉ việc"</strong>, học thực chiến trên chính dự án của bạn.</p>
+        <p>Mỗi lớp tối đa <strong>10 học viên</strong> để giảng viên có thể hỗ trợ từng người một cách tốt nhất. Học xong là làm được ngay.</p>
+      </div>
+      <div class="about-features">
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+          </div>
+          <div class="about-feature-text">
+            <h4>Thuật toán Google mới nhất</h4>
+            <p>Chương trình cập nhật liên tục, đảm bảo kiến thức luôn thực tế.</p>
+          </div>
         </div>
-    </section>
-		 <div class="header">
-			<div class="logomot">
-			 <div class="logo1">
-				<img src="img/123.png">
-				</div>
-			 </div>
-			<div class="menukhong">
-			 <ul>
-				<li><a href="#mot">TRANG CHỦ</a></li>
-				<li><a href="#hai">VỀ TÔI</a></li>
-				<li><a href="#ba">DỊCH VỤ</a></li>
-				<li><a href="#bon">KĨ NĂNG</a></li>
-				<li><a href="#nam">LIÊN HỆ</a></li>
-			 </ul>
-			 </div>
-			</div>
-		
-		</div>
-		<div class="hai" id="hai">
-		 <div class="gomhinh">
-			 <img src="img/about/about-1.jpg" >
-			 <img src="img/about/about-2.jpg">
-			 <img src="img/about/about-3.jpg">
-			
-			</div>
-		<div class="about1">GIỚI THIỆU VỀ VIDEOGRAPH
-CHÚNG TA LÀ AI?</div>
-		<div class="about2">Phân phối video
-Cho dù bạn đang thực hiện một nửa quá trình chỉnh sửa hay bạn.</div>
-		<div class="about3">Lưu trữ video
-Cho dù bạn đang thực hiện một nửa quá trình chỉnh sửa hay bạn.</div>
-			<div class="about4">Được thành lập vào năm 2006 bởi Matt Hobbs và Cael Jones, Videoprah là một công ty sản xuất dịch vụ đầy đủ, từng đoạt giải thưởng chuyên về các dịch vụ sản xuất video thương mại, phát sóng, du lịch và thể thao hành động.</div>
-<div class="about5"></div>
-	  </div>
-		<div class="ba" id="ba">
-		  <section class="services spad">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="services__title">
-                        <div class="section-title">
-                            <span>Our services</span>
-                            <h2>What We do?</h2>
-                        </div>
-                        <p>Nếu bạn thuê một nhà quay phim của nhóm chúng tôi, bạn sẽ nhờ một chuyên gia quay video thực hiện một tùy chỉnh
-                            video cho doanh nghiệp của bạn và sau khi dự án kết thúc.
-
-</p>
-                        <a href="#" class="primary-btn">View all services</a>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="services__item">
-                                <div class="services__item__icon">
-                                    <img src="img/icons/si-1.png" alt="">
-                                </div>
-                                <h4>Motion graphics</h4>
-                                <p>Nếu bạn thuê một nhà quay phim của nhóm chúng tôi, bạn sẽ nhờ một chuyên gia quay video thực hiện một tùy chỉnh
-                            video cho doanh nghiệp của bạn và sau khi dự án kết thúc.
-
-</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="services__item">
-                                <div class="services__item__icon">
-                                    <img src="img/icons/si-2.png" alt="">
-                                </div>
-                                <h4>Scriptwriting and editing</h4>
-                                <p>Nếu bạn thuê một nhà quay phim của nhóm chúng tôi, bạn sẽ nhờ một chuyên gia quay video thực hiện một tùy chỉnh
-                            video cho doanh nghiệp của bạn và sau khi dự án kết thúc.
-
-</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="services__item">
-                                <div class="services__item__icon">
-                                    <img src="img/icons/si-3.png" alt="">
-                                </div>
-                                <h4>Video distribution</h4>
-                                <p>Nếu bạn thuê một nhà quay phim của nhóm chúng tôi, bạn sẽ nhờ một chuyên gia quay video thực hiện một tùy chỉnh
-                            video cho doanh nghiệp của bạn và sau khi dự án kết thúc.
-
-</p>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 col-md-6 col-sm-6">
-                            <div class="services__item">
-                                <div class="services__item__icon">
-                                    <img src="img/icons/si-4.png" alt="">
-                                </div>
-                                <h4>Video hosting</h4>
-                                <p>Nếu bạn thuê một nhà quay phim của nhóm chúng tôi, bạn sẽ nhờ một chuyên gia quay video thực hiện một tùy chỉnh
-                            video cho doanh nghiệp của bạn và sau khi dự án kết thúc.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+          </div>
+          <div class="about-feature-text">
+            <h4>Thực hành 100% trên dự án thật</h4>
+            <p>PageSpeed Insights, Google Analytics, Rich Snippets 5 sao.</p>
+          </div>
         </div>
-    </section>
-		</div>
-		<div class="bon" id="bon"><h1>SKILL</h1>
-			<div class="bonall">
-		<img src="img/adobe.svg" style="width: 7%">
-		<img src="img/indesign.svg" style="width: 7%">
-		<img src="img/lightroom.svg" style="width: 7%">
-		<img src="img/photoshop.svg" style="width: 7%">
-		<img src="img/premier.svg" style="width: 7%">
-		<img src="img/adobe.svg" style="width: 7%">
-				</div>
-			<div class="bon0">
-				<div class="bonmot"></div>
-			<div class="bonkhong"></div>
-				</div>
-			<div class="bon1">
-				<div class="bonhai"></div>
-			<div class="bonkhong"></div>
-				</div>
-			<div class="bon2">
-				<div class="bonba"></div>
-			<div class="bonkhong"></div>
-				</div>
-			<div class="bon3">
-				<div class="bonbon"></div>
-			<div class="bonkhong"></div>
-				</div>
-			<div class="bon4">
-				<div class="bonnam"></div>
-			<div class="bonkhong"></div>
-				</div>
-			<div class="bon5">
-				<div class="bonsau"></div>
-			<div class="bonkhong"></div>
-				</div>
-		</div>
-		<div class="nam" id="nam">
-		   <div class="nam1">
-			<div class="nam2">
-			   <div class="nam3">
-				<img src="img/768px-Facebook_Logo_(2019).png" style="width: 100%">
-				</div>
-			   
-				Đỗ Quốc Hậu
-			   </div>
-			   <div class="nam21">
-			   <div class="nam3">
-				   <img src="img/—Pngtree—telephone symbol icon_2965774.png" style="width: 100%">
-				   </div>
-			   
-0904120254			   </div>
-			   <div class="nam22">
-			   <div class="nam3">
-				   <img src="img/gmail.png" style="width: 100%">
-				   </div>
-			   
-				doquochau92
-			   </div>
-			</div>
-		   <div class="footerkhong"></div>
-		</div>
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	</div>
-	  <script src="js/jquery-3.3.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/jquery.magnific-popup.min.js"></script>
-    <script src="js/mixitup.min.js"></script>
-    <script src="js/masonry.pkgd.min.js"></script>
-    <script src="js/jquery.slicknav.js"></script>
-    <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
-	
-	
+        <div class="about-feature">
+          <div class="about-feature-icon">
+            <!-- FIX #17: Dùng icon headset/support thay vì phone (rõ nghĩa hơn) -->
+            <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+          </div>
+          <div class="about-feature-text">
+            <h4>Hỗ trợ lâu dài sau khoá</h4>
+            <p>Loại bỏ traffic bẩn, tư vấn chiến lược SEO không giới hạn.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="instructor-wrap">
+      <img class="instructor-img" src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/giang-vien-seo-linh-nguyen.png" alt="Giảng viên Linh Nguyễn">
+      <div class="instructor-name">Nguyễn Hồng Linh</div>
+      <div class="instructor-role">Founder & CEO Faceseo — Giảng viên trực tiếp</div>
+      <div class="instructor-quote">"Học cùng Linh Nguyễn là điều may mắn nhất — không chỉ là kiến thức Digital Marketing mà còn là cả những giá trị thực tế."</div>
+      <div class="instructor-list">
+        <div class="instructor-list-item">CEO Faceseo, Founder 500KUSER.COM</div>
+        <div class="instructor-list-item">10 năm Digital Marketing, 5 năm đào tạo doanh nghiệp</div>
+        <div class="instructor-list-item">Hệ thống Faceseo.vn với 10.000+ thành viên</div>
+        <div class="instructor-list-item">Triển khai SEO BĐS, ô tô, du lịch, xây dựng...</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CURRICULUM -->
+<div id="curriculum" class="section-full">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-tag">Nội dung khoá học</div>
+    <h2 class="section-title">13 Buổi Trở Thành<br>Chuyên Gia Digital Marketing</h2>
+    <p class="section-desc" style="margin-bottom:40px">Từ nền tảng đến chuyên sâu — toàn bộ bộ 3 công cụ chủ lực: SEO, Google Ads, Facebook Ads.</p>
+    <div class="curriculum-wrap">
+      <div class="curriculum-item"><div class="curriculum-num">01</div><div class="curriculum-text"><strong>Tạo hệ thống web nền tảng mới</strong> — vừa hỗ trợ SEO, vừa làm web chính. Chi phí 0đ</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">02</div><div class="curriculum-text"><strong>Tích hợp tiện ích hiện đại</strong> — công cụ quản trị giúp tăng lượng data chốt khách</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">03</div><div class="curriculum-text"><strong>Onpage SEO + Content SEO</strong> + ChatGPT + Prompt SEO chuyên sâu</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">04</div><div class="curriculum-text"><strong>Design Landingpage</strong> — tăng gấp 3 tỷ lệ chuyển đổi</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">05</div><div class="curriculum-text"><strong>WordPress & Auto Spin Content</strong> — rải vệ tinh tự động</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">06</div><div class="curriculum-text"><strong>Traffic chất lượng</strong> — đẩy website lên Top Google mạnh mẽ</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">07</div><div class="curriculum-text"><strong>Tools SEO WordPress</strong> — cấu hình tối ưu chuyên nghiệp</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">08</div><div class="curriculum-text"><strong>Chiến lược Backlink</strong> — tools bắn link lên TOP tự động</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">09</div><div class="curriculum-text"><strong>Google Analytics + Webmaster</strong> + Xử lý link xấu + SEO Local + Rich Snippets</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">10</div><div class="curriculum-text"><strong>Google Adwords cơ bản</strong> + Cài đặt tài khoản MCC</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">11</div><div class="curriculum-text"><strong>Tối ưu giảm 60% chi phí Adwords</strong> + Remarketing Adwords</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">12</div><div class="curriculum-text"><strong>Facebook Ads Business</strong> — bảo mật FB, set camp Lead, tạo tệp đối tượng chất lượng</div></div>
+      <div class="curriculum-item"><div class="curriculum-num">13</div><div class="curriculum-text"><strong>Remarketing FB</strong> + Tools quản lý khách + Bí quyết chốt Deal không cần chạy Ads</div></div>
+      <div class="curriculum-item" style="background:linear-gradient(135deg,#1352c9,#1a65e8);border-color:transparent">
+        <div class="curriculum-num" style="background:rgba(255,255,255,0.2);color:#fff">🔥</div>
+        <div class="curriculum-text" style="color:#fff"><strong>BONUS:</strong> Landingpage Pro + Getdata Realtime + Hệ sinh thái chăm sóc khách — Ngày có 20 data chốt Sale</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BENEFITS -->
+<section class="section">
+  <div class="section-tag">Lợi ích</div>
+  <h2 class="section-title">Giá Trị Bạn Nhận Được</h2>
+  <div class="benefits-grid" style="margin-top:40px">
+    <div class="benefit-card">
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      </div>
+      <h3>Chất Lượng Hàng Đầu</h3>
+      <p>Chương trình cập nhật liên tục thuật toán mới nhất Google. Nền tảng chuyên môn từ tư duy đến cách làm — đảm bảo học được và làm được.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon-wrap">
+        <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+      </div>
+      <h3>Thực Hành 100%</h3>
+      <p>Đo lường PageSpeed Insights, cài đặt Google Analytics, tạo Rich Snippets 5 sao. Ngoài SEO còn học Google Adwords và Facebook Ads — bộ 3 công cụ chủ lực.</p>
+    </div>
+    <div class="benefit-card">
+      <div class="benefit-icon-wrap">
+        <!-- FIX #18: Dùng icon headset cho benefit "Hỗ trợ lâu dài" -->
+        <svg viewBox="0 0 24 24"><path d="M3 18v-6a9 9 0 0118 0v6"/><path d="M21 19a2 2 0 01-2 2h-1a2 2 0 01-2-2v-3a2 2 0 012-2h3zM3 19a2 2 0 002 2h1a2 2 0 002-2v-3a2 2 0 00-2-2H3z"/></svg>
+      </div>
+      <h3>Hỗ Trợ Lâu Dài</h3>
+      <p>Cam kết đồng hành sau khoá học. Hỗ trợ loại bỏ traffic bẩn, tư vấn Digital Marketing và bổ sung kiến thức qua các buổi Offline định kỳ.</p>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:40px">
+    <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/gia-tri-seo-mang-lai.png" alt="Giá trị SEO mang lại" style="max-width:600px;width:100%;border-radius:16px;box-shadow:0 8px 40px rgba(19,82,201,0.12)">
+  </div>
+</section>
+
+<!-- GALLERY -->
+<div id="gallery" class="gallery-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="section-tag">Hình ảnh lớp học</div>
+    <h2 class="section-title">Lớp Học Thực Chiến Tại Faceseo</h2>
+    <div class="gallery-grid">
+      <div class="gallery-item big"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-1.jpg" alt="Lớp học Faceseo 1" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-2.jpg" alt="Lớp học 2" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-3.jpg" alt="Lớp học 3" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-4.jpg" alt="Lớp học 4" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-5.jpg" alt="Lớp học 5" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-6.jpg" alt="Lớp học 6" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-7.jpg" alt="Lớp học 7" loading="lazy"></div>
+      <div class="gallery-item"><img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/khoa-hoc-marketing-online-chuyen-sau-8.jpg" alt="Lớp học 8" loading="lazy"></div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="section">
+  <div class="section-tag">Học viên tiêu biểu</div>
+  <h2 class="section-title">Áp Dụng Đúng Là Có Nhà Có Xe</h2>
+  <div class="testimonials-grid">
+    <div class="testimonial-card">
+      <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/hv-xuat-sac/1-duong-quoc-thuy.jpg" alt="Học viên tiêu biểu" loading="lazy">
+      <div class="testimonial-caption"><strong>Dương Quốc Thúy</strong>Tổng giám đốc Đất Xanh Miền Tây</div>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/hv-xuat-sac/2-nguyen-ngoc-min.jpg" alt="Học viên tiêu biểu" loading="lazy">
+      <div class="testimonial-caption"><strong>Nguyễn Ngọc Minh</strong>Giám đốc Đất Xanh Premium</div>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/hv-xuat-sac/3-nguyen-trien.jpg" alt="Học viên tiêu biểu" loading="lazy">
+      <div class="testimonial-caption"><strong>Nguyễn Triển</strong>Tổng giám đốc SunriseLand</div>
+    </div>
+    <div class="testimonial-card">
+      <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/hv-xuat-sac/4-manh-tin.jpg" alt="Học viên tiêu biểu" loading="lazy">
+      <div class="testimonial-caption"><strong>Mạnh Tín</strong>Giám đốc sàn SCInvestment</div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<div id="pricing" class="section-full">
+  <div style="max-width:1200px;margin:0 auto;text-align:center">
+    <div class="section-tag" style="justify-content:center">Học phí & ưu đãi</div>
+    <h2 class="section-title">Đầu Tư Cho Tương Lai</h2>
+    <div class="pricing-grid">
+      <div class="pricing-card">
+        <div class="pricing-type">Khoá Học Offline</div>
+        <div class="pricing-price">9<span>tr</span></div>
+        <div class="pricing-original">10.000.000đ</div>
+        <div class="pricing-features">
+          <div class="pricing-feature">13 buổi học tại trung tâm Faceseo</div>
+          <div class="pricing-feature">Địa chỉ: 36 Đường A4, Q. Tân Bình, TP.HCM</div>
+          <div class="pricing-feature">Tối đa 10 học viên/lớp</div>
+          <div class="pricing-feature">Giảng viên trực tiếp: Linh Nguyễn</div>
+          <div class="pricing-feature">Hỗ trợ sau khoá miễn phí</div>
+        </div>
+        <a class="btn-register outline" href="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/">Đăng Ký Học</a>
+      </div>
+      <div class="pricing-card featured">
+        <div class="pricing-badge">Phổ biến nhất</div>
+        <div class="pricing-type">Khoá Học Zoom Online</div>
+        <div class="pricing-price">9<span>tr</span></div>
+        <div class="pricing-original">10.000.000đ — Ưu đãi 10% học xa</div>
+        <div class="pricing-features">
+          <div class="pricing-feature">13 buổi học qua Zoom — học mọi nơi</div>
+          <div class="pricing-feature">Phù hợp học viên ở xa TPHCM, Việt Kiều</div>
+          <div class="pricing-feature">Chất lượng không thua kém Offline</div>
+          <div class="pricing-feature">Hỗ trợ kiến thức 3 tháng sau khoá</div>
+          <div class="pricing-feature">Đăng ký nhóm 2-3 bạn giảm 20%</div>
+        </div>
+        <a class="btn-register" href="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/">Đăng Ký Ngay</a>
+      </div>
+    </div>
+    <p style="margin-top:24px;font-size:13px;color:var(--gray)">📞 Gọi <strong>0932.523.569</strong> để được tư vấn miễn phí và đặt chỗ sớm</p>
+  </div>
+</div>
+
+<!-- CTA -->
+<div class="cta-section">
+  <h2>Sẵn Sàng Lên Top Google?</h2>
+  <p>Đăng ký ngay hôm nay — chỉ 10 học viên/lớp, số lượng có hạn!</p>
+  <div class="cta-buttons">
+    <a class="btn-cta-white" href="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/">Xem Chi Tiết & Đăng Ký →</a>
+    <a class="btn-cta-outline" href="tel:0932523569">📞 Gọi 0932.523.569</a>
+  </div>
+  <div class="contact-info">
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      <span>36 Đường A4, Phường 12, Quận Tân Bình, <strong>TP.HCM</strong></span>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span><strong>info@faceseo.vn</strong></span>
+    </div>
+    <div class="contact-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20M12 2a15.3 15.3 0 000 20"/></svg>
+      <span><strong>www.faceseo.vn</strong></span>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER — FIX #12: Thêm .footer-logo wrapper cho đúng CSS -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://hocvienfaceseo.com/khoa-hoc-marketing-online-chuyen-sau/images/logo.png" alt="Faceseo">
+  </div>
+  <div class="footer-copy">© Bản quyền Faceseo Việt Nam. Vui lòng ghi rõ nguồn khi sử dụng lại thông tin.</div>
+</footer>
+
 </body>
 </html>
